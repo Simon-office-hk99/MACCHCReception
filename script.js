@@ -1,3 +1,15 @@
+        // Calculate content height and send it to the parent window
+        function sendHeightToParent() {
+            const contentHeight = document.body.scrollHeight;
+            window.parent.postMessage({
+                type: 'setHeight',
+                height: contentHeight
+            }, 'file:///C:/New%20Folder/Playlist/'); // Replace with your parent page's origin
+        }
+
+        // Call the function to send the height to the parent window
+        sendHeightToParent();
+
     function extractVideoId(link) {
         const url = new URL(link);
         let videoId = '';
