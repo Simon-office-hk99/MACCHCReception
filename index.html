@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>YouTube Player for Kids</title>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode-generator/qrcode.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.6/flatpickr.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.6/flatpickr.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="dateDisplay"></div>
+    <div id="videoContainer"></div>
+    <div id="generateUrl">
+        <form id="urlForm">
+            <label for="inputDate">Select Date:</label><br>
+            <input type="text" id="inputDate" name="inputDate" placeholder="Select Date" autocomplete="off"><br>
+            <label for="inputYouTubeLink">YouTube Links (comma-separated or new lines):</label><br>
+            <textarea id="inputYouTubeLink" name="inputYouTubeLink" rows="5" placeholder="Paste YouTube Links"></textarea><br>
+            <input type="submit" value="Generate URL">
+        </form>
+        <div id="qrcode"></div>
+        <p id="generatedUrlText"></p>      
+    </div>
+    <div id="iframeContainer"></div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
