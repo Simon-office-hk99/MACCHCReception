@@ -1,3 +1,5 @@
+	const ParentUrl_origin = 'https://receptionmacchc.tiiny.site/';
+        const ParentUrl_path = '';
 
         // Calculate content height and send it to the parent window
         function sendHeightToParent() {
@@ -5,7 +7,7 @@
             window.parent.postMessage({
                 type: 'setHeight',
                 height: contentHeight
-            }, window.parent.location.origin); // Replace with your parent page's origin
+            }, ParentUrl_origin); // Replace with your parent page's origin
         }
 
         // Call the function to send the height to the parent window
@@ -87,7 +89,7 @@
                     const youtubeLinksArray = youtubeLinksValue.split(/[\s,]+/).map(link => link.trim());
                     const youtubeLinksEncoded = youtubeLinksArray.map(link => encodeURIComponent(link)).join(',');
 
-                    const currentPageUrl = window.parent.location.origin + window.parent.location.pathname;
+                    const currentPageUrl = ParentUrl_origin + ParentUrl_path;
                     const generatedURL = `${currentPageUrl}?date=${dateValue}&youtube_link=${youtubeLinksEncoded}`;
 
                     const urlText = document.getElementById('generatedUrlText');
