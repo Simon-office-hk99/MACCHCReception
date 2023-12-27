@@ -115,10 +115,11 @@
                         iframeContainer.appendChild(iframe);
                     });
 
+		    sendHeightToParent();
+
                     // Update URL with new parameters
                     window.history.pushState({}, '', generatedURL);
 			
-                    sendHeightToParent();
                 }
             });       
           
