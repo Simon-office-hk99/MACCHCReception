@@ -1,10 +1,11 @@
+
         // Calculate content height and send it to the parent window
         function sendHeightToParent() {
             const contentHeight = document.body.scrollHeight;
             window.parent.postMessage({
                 type: 'setHeight',
                 height: contentHeight
-            }, 'file:///C:/New%20Folder/Playlist/'); // Replace with your parent page's origin
+            }, window.parent.location.origin); // Replace with your parent page's origin
         }
 
         // Call the function to send the height to the parent window
@@ -86,7 +87,7 @@
                     const youtubeLinksArray = youtubeLinksValue.split(/[\s,]+/).map(link => link.trim());
                     const youtubeLinksEncoded = youtubeLinksArray.map(link => encodeURIComponent(link)).join(',');
 
-                    const currentPageUrl = window.location.origin + window.location.pathname;
+                    const currentPageUrl = window.parent.location.origin + window.parent.location.pathname;
                     const generatedURL = `${currentPageUrl}?date=${dateValue}&youtube_link=${youtubeLinksEncoded}`;
 
                     const urlText = document.getElementById('generatedUrlText');
