@@ -70,6 +70,9 @@
 
             displayInitialData(); // Display initial data
 
+        // Call the function to send the height to the parent window
+        sendHeightToParent();
+
             // Flatpickr date configuration
             flatpickr(inputDate, {
                 dateFormat: 'Y-m-d',
