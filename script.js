@@ -6,7 +6,7 @@
             const contentHeight = document.body.scrollHeight;
             window.parent.postMessage({
                 type: 'setHeight',
-                height: contentHeight
+                height: contentHeight + 50
             }, ParentUrl_origin); // Replace with your parent page's origin
         }
 
@@ -117,6 +117,8 @@
 
                     // Update URL with new parameters
                     window.history.pushState({}, '', generatedURL);
+			
+                    sendHeightToParent();
                 }
             });       
           
