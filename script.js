@@ -1,6 +1,30 @@
 	const ParentUrl_origin = 'https://receptionmacchc.tiiny.site/';
         const ParentUrl_path = '';
 
+const { Octokit } = require("octokit");
+
+// Create an Octokit instance with your GitHub personal access token
+const octokit = new Octokit({ auth: "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" });
+
+// Function to write data to a file in a GitHub repository
+async function writeDataToFile(data) {
+    try {
+        const response = await octokit.request('PUT /repos/:owner/:repo/contents/:path', {
+            owner: 'Simon-office-hk99',
+            repo: 'MACCHCReception',
+            path: 'path_to_your_file.txt',
+            message: 'Commit message',
+            content: Buffer.from(data).toString('base64') // Convert data to Base64
+        });
+        console.log('File updated:', response.data);
+    } catch (error) {
+        console.error('Error updating file:', error);
+    }
+}
+
+// Call this function with your form data to write it to the file
+writeDataToFile('Your form data here');
+
         // Calculate content height and send it to the parent window
         function sendHeightToParent() {
             const contentHeight = document.body.scrollHeight;
