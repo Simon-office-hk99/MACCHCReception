@@ -30,9 +30,6 @@ fetch(apiUrl, {
 });
 
 
-// Call this function with your form data to write it to the file
-writeDataToFile('Your form data here');
-
         // Calculate content height and send it to the parent window
         function sendHeightToParent() {
             const contentHeight = document.body.scrollHeight;
