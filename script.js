@@ -1,26 +1,34 @@
 	const ParentUrl_origin = 'https://receptionmacchc.tiiny.site/';
         const ParentUrl_path = '';
 
-const { Octokit } = require("octokit");
+const apiUrl = 'https://simon-office-hk99.github.io/MACCHCReception/path_to_your_file.txt';
 
-// Create an Octokit instance with your GitHub personal access token
-const octokit = new Octokit({ auth: "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" });
+const token = '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';
 
-// Function to write data to a file in a GitHub repository
-async function writeDataToFile(data) {
-    try {
-        const response = await octokit.request('PUT /repos/:owner/:repo/contents/:path', {
-            owner: 'Simon-office-hk99',
-            repo: 'MACCHCReception',
-            path: 'path_to_your_file.txt',
-            message: 'Commit message',
-            content: Buffer.from(data).toString('base64') // Convert data to Base64
-        });
-        console.log('File updated:', response.data);
-    } catch (error) {
-        console.error('Error updating file:', error);
+const requestData = {
+    message: 'Commit message',
+    content: btoa('Your data to be stored in the file'), // Encode data to base64
+};
+
+fetch(apiUrl, {
+    method: 'PUT',
+    headers: {
+        'Authorization': `token ${token}`,
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(requestData),
+})
+.then(response => {
+    if (response.ok) {
+        console.log('File updated successfully.');
+    } else {
+        console.error('Failed to update file:', response.statusText);
     }
-}
+})
+.catch(error => {
+    console.error('Error:', error);
+});
+
 
 // Call this function with your form data to write it to the file
 writeDataToFile('Your form data here');
