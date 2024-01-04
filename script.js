@@ -3,7 +3,8 @@
 
 const apiUrl = 'https://simon-office-hk99.github.io/MACCHCReception/path_to_your_file.txt';
 
-const token = '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';
+//const token = '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';
+import { token } from 'https://simon-office-hk99.github.io/MACCHCReception/githubConfig.js';
 
 const requestData = {
     message: 'Commit message',
