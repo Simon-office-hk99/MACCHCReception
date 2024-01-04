@@ -4,7 +4,7 @@
 const apiUrl = 'https://simon-office-hk99.github.io/MACCHCReception/path_to_your_file.txt';
 
 //const token = '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';
-import { token } from 'https://receptionmacchc.tiiny.site/config.js';
+import { githubToken } from 'https://receptionmacchc.tiiny.site/config.js';
 
 const requestData = {
     message: 'Commit message',
@@ -14,7 +14,7 @@ const requestData = {
 fetch(apiUrl, {
     method: 'PUT',
     headers: {
-        'Authorization': `token ${token}`,
+        'Authorization': `token ${githubToken}`,
         'Content-Type': 'application/json',
     },
     body: JSON.stringify(requestData),
