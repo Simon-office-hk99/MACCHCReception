@@ -6,8 +6,21 @@ const apiUrl = 'https://api.github.com/repos/simon-office-hk99/MACCHCReception/c
 //const token = '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';
 import { githubToken } from 'https://receptionmacchc.tiiny.site/config.js';
 
+// Make a GET request to retrieve the file details
+fetch(apiUrl)
+  .then(response => response.json())
+  .then(data => {
+    // The SHA of the file is available in the response data
+    const apiUrl_sha = data.sha;
+    console.log('SHA of the file:', sha);
+  })
+  .catch(error => {
+    console.error('Error fetching file details:', error);
+  });
+
 const requestData = {
     message: 'Commit message',
+    sha: apiUrl_sha,
     content: btoa('Your data to be stored in the file'), // Encode data to base64
 };
 
