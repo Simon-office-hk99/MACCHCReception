@@ -1,4 +1,5 @@
 import { githubToken } from 'https://receptionmacchc.tiiny.site/config.js';
+import { Octokit } from "https://esm.sh/@octokit/core"
 
         const ParentUrl_origin = 'https://receptionmacchc.tiiny.site/';
         const ParentUrl_path = '';
@@ -136,7 +137,6 @@ fetch(apiUrl)
     console.error('Error fetching file details:', error);
   });
 
-   import { Octokit } from "https://esm.sh/@octokit/core"
         const octokit = new Octokit({
             auth: githubToken
         });
