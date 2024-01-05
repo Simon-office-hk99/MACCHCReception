@@ -1,4 +1,6 @@
-	const ParentUrl_origin = 'https://receptionmacchc.tiiny.site/';
+import { githubToken } from 'https://receptionmacchc.tiiny.site/config.js';
+
+        const ParentUrl_origin = 'https://receptionmacchc.tiiny.site/';
         const ParentUrl_path = '';
 
         // Calculate content height and send it to the parent window
@@ -121,8 +123,6 @@
 var apiUrl_sha = '';
 
 const apiUrl = 'https://api.github.com/repos/simon-office-hk99/MACCHCReception/contents/path_to_your_file.txt';
-
-import { githubToken } from 'https://receptionmacchc.tiiny.site/config.js';
 
 // Make a GET request to retrieve the file details
 fetch(apiUrl)
