@@ -6,7 +6,7 @@ const apiUrl = 'https://api.github.com/repos/simon-office-hk99/MACCHCReception/c
 
 //const token = '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';
 import { githubToken } from 'https://receptionmacchc.tiiny.site/config.js';
-console.log('Token:', githubToken);
+//console.log('Token:', githubToken);
 
 
 // Make a GET request to retrieve the file details
@@ -27,6 +27,8 @@ const requestData = {
     content: btoa('Your data to be stored in the file'), // Encode data to base64
 };
 
+console.log('Content:', btoa('Your data to be stored in the file'));
+
 fetch(apiUrl, {
     method: 'PUT',
     headers: {
@@ -35,6 +37,15 @@ fetch(apiUrl, {
     },
     body: JSON.stringify(requestData),
 })
+  .then(response => response.json())
+  .then(data => {
+        console.log('File updated successfully.');
+        
+        })
+  .catch(error => {
+        console.log(error);
+        alert(JSON.stringify(error.message))
+		/*
 .then(response => {
     if (response.ok) {
         console.log('File updated successfully.');
@@ -44,7 +55,7 @@ fetch(apiUrl, {
 })
 .catch(error => {
     console.error('Error:', error);
-});
+});*/
 
 
         // Calculate content height and send it to the parent window
