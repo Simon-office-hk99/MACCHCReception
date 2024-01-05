@@ -1,5 +1,6 @@
 	const ParentUrl_origin = 'https://receptionmacchc.tiiny.site/';
         const ParentUrl_path = '';
+	var apiUrl_sha = '';
 
 const apiUrl = 'https://api.github.com/repos/simon-office-hk99/MACCHCReception/contents/path_to_your_file.txt?ref=main';
 
@@ -11,7 +12,7 @@ fetch(apiUrl)
   .then(response => response.json())
   .then(data => {
     // The SHA of the file is available in the response data
-    const apiUrl_sha = data.sha;
+    apiUrl_sha = data.sha;
     console.log('SHA of the file:', sha);
   })
   .catch(error => {
