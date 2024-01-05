@@ -20,6 +20,7 @@ fetch(apiUrl)
     console.error('Error fetching file details:', error);
   });
 
+   import { Octokit } from "https://esm.sh/@octokit/core"
         const octokit = new Octokit({
             auth: githubToken
         });
