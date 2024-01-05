@@ -6,6 +6,8 @@ const apiUrl = 'https://api.github.com/repos/simon-office-hk99/MACCHCReception/c
 
 //const token = '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';
 import { githubToken } from 'https://receptionmacchc.tiiny.site/config.js';
+console.log('Token:', githubToken);
+
 
 // Make a GET request to retrieve the file details
 fetch(apiUrl)
