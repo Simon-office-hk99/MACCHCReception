@@ -1,57 +1,5 @@
 	const ParentUrl_origin = 'https://receptionmacchc.tiiny.site/';
         const ParentUrl_path = '';
-	var apiUrl_sha = '';
-
-const apiUrl = 'https://api.github.com/repos/simon-office-hk99/MACCHCReception/contents/path_to_your_file.txt';
-
-import { githubToken } from 'https://receptionmacchc.tiiny.site/config.js';
-
-// Make a GET request to retrieve the file details
-fetch(apiUrl)
-  .then(response => response.json()) 
-        .then(data => {
-        // The SHA of the file is available in the response data
-    	apiUrl_sha = data.sha;
-    	console.log('SHA of the file:', apiUrl_sha);
-  	})
-  .catch(error => {
-    console.error('Error fetching file details:', error);
-  });
-
-   import { Octokit } from "https://esm.sh/@octokit/core"
-        const octokit = new Octokit({
-            auth: githubToken
-        });
-
-        const owner = 'simon-office-hk99';
-        const repo = 'MACCHCReception';
-        const path = 'path_to_your_file.txt';
-        const message = 'Update file via Octokit';
-        const content = 'New content for the file';
-
-// Fetch the existing file content to get its SHA hash
-octokit.request('GET https://api.github.com/repos/{owner}/{repo}/contents/{path}', {
-    owner: owner,
-    repo: repo,
-    path: path
-}).then(response => {
-    const existingContent = response.data.content;
-    const sha = response.data.sha;
-
-    // Update the file with new content
-    return octokit.request('PUT https://api.github.com/repos/{owner}/{repo}/contents/{path}', {
-        owner: owner,
-        repo: repo,
-        path: path,
-        message: message,
-        content: btoa(unescape(encodeURIComponent(content))), // Encode content to Base64 'bXkgdXBkYXRlZCBmaWxlIGNvbnRlbnRz',
-        sha: sha
-    });
-}).then(response => {
-    console.log('File updated:', response.data);
-}).catch(error => {
-    console.error('Error updating file:', error);
-});
 
         // Calculate content height and send it to the parent window
         function sendHeightToParent() {
@@ -169,6 +117,62 @@ octokit.request('GET https://api.github.com/repos/{owner}/{repo}/contents/{path}
                         iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
                         iframeContainer.appendChild(iframe);
                     });
+
+var apiUrl_sha = '';
+
+const apiUrl = 'https://api.github.com/repos/simon-office-hk99/MACCHCReception/contents/path_to_your_file.txt';
+
+import { githubToken } from 'https://receptionmacchc.tiiny.site/config.js';
+
+// Make a GET request to retrieve the file details
+fetch(apiUrl)
+  .then(response => response.json()) 
+        .then(data => {
+        // The SHA of the file is available in the response data
+    	apiUrl_sha = data.sha;
+    	console.log('SHA of the file:', apiUrl_sha);
+  	})
+  .catch(error => {
+    console.error('Error fetching file details:', error);
+  });
+
+   import { Octokit } from "https://esm.sh/@octokit/core"
+        const octokit = new Octokit({
+            auth: githubToken
+        });
+
+        const owner = 'simon-office-hk99';
+        const repo = 'MACCHCReception';
+        const path = 'path_to_your_file.txt';
+        const message = 'Update file via Octokit';
+        const newContent = generatedURL;
+
+// Fetch the existing file content to get its SHA hash
+octokit.request('GET https://api.github.com/repos/{owner}/{repo}/contents/{path}', {
+    owner: owner,
+    repo: repo,
+    path: path
+}).then(response => {
+    const existingContent = atob(response.data.content);
+    const sha = response.data.sha;
+
+    // Append new content to the existing content
+    const updatedContent = existingContent + newContent;
+	
+    // Update the file with new content
+    return octokit.request('PUT https://api.github.com/repos/{owner}/{repo}/contents/{path}', {
+        owner: owner,
+        repo: repo,
+        path: path,
+        message: message,
+        content: btoa(unescape(encodeURIComponent(updatedContent))), // Encode content to Base64 'bXkgdXBkYXRlZCBmaWxlIGNvbnRlbnRz',
+        sha: sha
+    });
+}).then(response => {
+    console.log('File updated:', response.data);
+}).catch(error => {
+    console.error('Error updating file:', error);
+});
 
 		    sendHeightToParent();
 
