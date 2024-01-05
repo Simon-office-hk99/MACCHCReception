@@ -8,7 +8,6 @@ const apiUrl = 'https://api.github.com/repos/simon-office-hk99/MACCHCReception/c
 import { githubToken } from 'https://receptionmacchc.tiiny.site/config.js';
 //console.log('Token:', githubToken);
 
-
 // Make a GET request to retrieve the file details
 fetch(apiUrl)
   .then(response => response.json()) 
@@ -21,42 +20,27 @@ fetch(apiUrl)
     console.error('Error fetching file details:', error);
   });
 
-const requestData = {
-    message: 'Commit message',
-    sha: apiUrl_sha,
-    content: btoa('Your data to be stored in the file'), // Encode data to base64
-};
+        const octokit = new Octokit({
+            auth: githubToken
+        });
 
-console.log('Content:', btoa('Your data to be stored in the file'));
+        const owner = 'simon-office-hk99';
+        const repo = 'MACCHCReception';
+        const path = 'path_to_your_file.txt';
+        const message = 'Update file via Octokit';
+        const content = 'New content for the file';
 
-fetch(apiUrl, {
-    method: 'PUT',
-    headers: {
-        'Authorization': 'Bearer ${githubToken}',
-	'X-GitHub-Api-Version': '2022-11-28',
-    },
-    body: JSON.stringify(requestData),
-})
-  .then(response => response.json())
-  .then(data => {
-        console.log('File updated successfully.');
-        
-        })
-  .catch(error => {
-        console.log(error);
-        alert(JSON.stringify(error.message))
-		/*
-.then(response => {
-    if (response.ok) {
-        console.log('File updated successfully.');
-    } else {
-        console.error('Failed to update file:', response.statusText);
-    }
-})
-.catch(error => {
-    console.error('Error:', error);*/
-});
-
+        octokit.request('PUT https://api.github.com//repos/{owner}/{repo}/contents/{path}', {
+            owner: owner,
+            repo: repo,
+            path: path,
+            message: message,
+            content: Buffer.from(content).toString('base64')
+        }).then(response => {
+            console.log('File updated:', response.data);
+        }).catch(error => {
+            console.error('Error updating file:', error);
+        });
 
         // Calculate content height and send it to the parent window
         function sendHeightToParent() {
