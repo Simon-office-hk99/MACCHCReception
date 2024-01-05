@@ -193,7 +193,7 @@ octokit.request('GET https://api.github.com/repos/{owner}/{repo}/contents/{path}
 		    sendHeightToParent();
 
                     // Update URL with new parameters
-                    window.history.pushState({}, '', generatedURL);
+                    //window.history.pushState({}, '', generatedURL);
 			
                 }
             });       
