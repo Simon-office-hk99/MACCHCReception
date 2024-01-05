@@ -4,9 +4,7 @@
 
 const apiUrl = 'https://api.github.com/repos/simon-office-hk99/MACCHCReception/contents/path_to_your_file.txt';
 
-//const token = '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';
 import { githubToken } from 'https://receptionmacchc.tiiny.site/config.js';
-//console.log('Token:', githubToken);
 
 // Make a GET request to retrieve the file details
 fetch(apiUrl)
@@ -46,7 +44,7 @@ octokit.request('GET https://api.github.com/repos/{owner}/{repo}/contents/{path}
         repo: repo,
         path: path,
         message: message,
-        content: 'bXkgdXBkYXRlZCBmaWxlIGNvbnRlbnRz',
+        content: btoa(unescape(encodeURIComponent(content))), // Encode content to Base64 'bXkgdXBkYXRlZCBmaWxlIGNvbnRlbnRz',
         sha: sha
     });
 }).then(response => {
