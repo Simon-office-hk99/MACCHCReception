@@ -2,7 +2,7 @@
         const ParentUrl_path = '';
 	var apiUrl_sha = '';
 
-const apiUrl = 'https://api.github.com/repos/simon-office-hk99/MACCHCReception/contents/path_to_your_file.txt?ref=main';
+const apiUrl = 'https://api.github.com/repos/simon-office-hk99/MACCHCReception/contents/path_to_your_file.txt';
 
 //const token = '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';
 import { githubToken } from 'https://receptionmacchc.tiiny.site/config.js';
@@ -28,8 +28,8 @@ const requestData = {
 fetch(apiUrl, {
     method: 'PUT',
     headers: {
-        'Authorization': `token ${githubToken}`,
-        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ${githubToken}',
+	'X-GitHub-Api-Version': '2022-11-28',
     },
     body: JSON.stringify(requestData),
 })
