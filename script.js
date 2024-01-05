@@ -10,16 +10,11 @@ import { githubToken } from 'https://receptionmacchc.tiiny.site/config.js';
 // Make a GET request to retrieve the file details
 fetch(apiUrl)
   .then(response => response.json()) 
-   if (response.ok) {
-        console.log('Read File successfully.');
         .then(data => {
         // The SHA of the file is available in the response data
     	apiUrl_sha = data.sha;
     	console.log('SHA of the file:', apiUrl_sha);
   	})
-  } else {
-	console.error('Failed to read file:', response.statusText);
-  }
   .catch(error => {
     console.error('Error fetching file details:', error);
   });
