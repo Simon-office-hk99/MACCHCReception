@@ -15,7 +15,7 @@ fetch(apiUrl)
         .then(data => {
         // The SHA of the file is available in the response data
     	apiUrl_sha = data.sha;
-    	console.log('SHA of the file:', sha);
+    	console.log('SHA of the file:', apiUrl_sha);
   	})
   } else {
 	console.error('Failed to read file:', response.statusText);
