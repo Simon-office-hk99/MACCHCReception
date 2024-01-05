@@ -4,6 +4,19 @@ import { Octokit } from "https://esm.sh/@octokit/core"
         const ParentUrl_origin = 'https://receptionmacchc.tiiny.site/';
         const ParentUrl_path = '';
 
+// Function to generate formatted timestamp
+function getFormattedTimestamp() {
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    const seconds = String(date.getSeconds()).padStart(2, '0');
+    
+    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+}
+
         // Calculate content height and send it to the parent window
         function sendHeightToParent() {
             const contentHeight = document.body.scrollHeight;
@@ -156,8 +169,11 @@ octokit.request('GET https://api.github.com/repos/{owner}/{repo}/contents/{path}
     const existingContent = atob(response.data.content);
     const sha = response.data.sha;
 
-    // Append new content to the existing content
-    const updatedContent = existingContent + newContent;
+    // Generate timestamp
+    const timestamp = getFormattedTimestamp();
+
+    // Append new content with timestamp to the existing content
+    const updatedContent = `${timestamp} ${newContent}\n${existingContent}`;
 	
     // Update the file with new content
     return octokit.request('PUT https://api.github.com/repos/{owner}/{repo}/contents/{path}', {
