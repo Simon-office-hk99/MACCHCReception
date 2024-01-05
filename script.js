@@ -31,21 +31,29 @@ fetch(apiUrl)
         const message = 'Update file via Octokit';
         const content = 'New content for the file';
 
-await octokit.request('PUT https://api.github.com/repos/{owner}/{repo}/contents/{path}', {
-  owner: owner,
-  repo: repo,
-  path: path,
-  message: message,
-  committer: {
-    name: 'Monalisa Octocat',
-    email: 'octocat@github.com'
-  },
-  content: 'bXkgdXBkYXRlZCBmaWxlIGNvbnRlbnRz',
-  sha: apiUrl_sha,
-  headers: {
-    'X-GitHub-Api-Version': '2022-11-28'
-  }
-})
+// Fetch the existing file content to get its SHA hash
+octokit.request('GET https://api.github.com/repos/{owner}/{repo}/contents/{path}', {
+    owner: owner,
+    repo: repo,
+    path: path
+}).then(response => {
+    const existingContent = response.data.content;
+    const sha = response.data.sha;
+
+    // Update the file with new content
+    return octokit.request('PUT https://api.github.com/repos/{owner}/{repo}/contents/{path}', {
+        owner: owner,
+        repo: repo,
+        path: path,
+        message: message,
+        content: 'bXkgdXBkYXRlZCBmaWxlIGNvbnRlbnRz',
+        sha: sha
+    });
+}).then(response => {
+    console.log('File updated:', response.data);
+}).catch(error => {
+    console.error('Error updating file:', error);
+});
 
         // Calculate content height and send it to the parent window
         function sendHeightToParent() {
