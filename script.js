@@ -54,8 +54,8 @@ fetch(apiUrl, {
     }
 })
 .catch(error => {
-    console.error('Error:', error);
-});*/
+    console.error('Error:', error);*/
+});
 
 
         // Calculate content height and send it to the parent window
